@@ -20,10 +20,11 @@ const StPopup = styled.div`
   width: 100vw;
   z-index: 10;
 
-  display: ${props => props.show ? 'flex' : 'none'}; //여기 나중에 껐다 켰다 바꾸는 걸로 수정
-  justify-content:center;
+  display: ${(props) =>
+    props.show ? "flex" : "none"}; //여기 나중에 껐다 켰다 바꾸는 걸로 수정
+  justify-content: center;
   align-items: center;
-  
+
   position: fixed;
   top: 0;
   left: 0;
@@ -37,9 +38,9 @@ const StPopup = styled.div`
     box-sizing: border-box;
     border-radius: 30px;
 
-    display:flex;
+    display: flex;
     flex-direction: column;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 
     background-color: #ffffffdb;
@@ -65,36 +66,62 @@ const StPopup = styled.div`
       line-height: 160%;
     }
   }
-`
+`;
 
 const Dex = () => {
+  const storage = () => {
+    //로컬 스토리지 비어있으면 초기값 설정
+    if (localStorage.getItem("pokemonDex") === null) {
+      const initialMy = Array(6).fill({
+        url: pokeball,
+        name: "",
+        filled: false,
+      });
+      localStorage.setItem("pokemonDex", JSON.stringify(initialMy));
+    }
+
+    // 로컬스토리지에서 'pokemonDex' 값 가져오기
+    return JSON.parse(localStorage.getItem("pokemonDex"));
+  };
+
   //초기 상태, 객체 6개, 기본이미지
-  const initialMy = Array(6).fill({ url: pokeball, name: '', filled: false });
-  const initialPopup = {img_url: '', korean_name: '', types: [], id: null, description: ''}
-  const [my, setMy] = useState(initialMy);
-  const [popup, setPopup] = useState(initialPopup)
+  const initialPopup = {
+    img_url: "",
+    korean_name: "",
+    types: [],
+    id: null,
+    description: "",
+  };
+
+  const [my, setMy] = useState(storage);
+  const [popup, setPopup] = useState(initialPopup);
   const navigator = useNavigate();
   let caught = my.some((el) => el.url === popup.img_url);
-  
 
   const handlePopupClick = () => {
-    setPopup({...popup, show:false})
-  }
+    setPopup({ ...popup, show: false });
+  };
 
   return (
     <StBox show={popup.show} gap="30px">
       <StPopup onClick={handlePopupClick} show={popup.show}>
         <div>
-          <img src={popup.img_url}/>
+          <img src={popup.img_url} />
           <h2>{popup.korean_name}</h2>
-          <p>{popup.types.join(' · ')}</p>
+          <p>{popup.types.join(" · ")}</p>
           <AddBtn caught={caught} pokemon={popup} my={my} setMy={setMy} />
           <h4>{popup.description}</h4>
         </div>
       </StPopup>
       <StLogoImg src={logo} onClick={() => navigator("/")} />
       <Dashboard my={my} setMy={setMy} pokeball={pokeball} />
-      <PokemonList my={my} setMy={setMy} MOCK_DATA={MOCK_DATA} popup={popup} setPopup={setPopup} />
+      <PokemonList
+        my={my}
+        setMy={setMy}
+        MOCK_DATA={MOCK_DATA}
+        popup={popup}
+        setPopup={setPopup}
+      />
     </StBox>
   );
 };
