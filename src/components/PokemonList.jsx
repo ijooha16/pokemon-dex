@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { StDexBox, StH1 } from "../shared/styleGuide";
+import AddBtn from "./AddBtn";
 
 const StGrid = styled.div`
   display: grid;
@@ -30,57 +31,14 @@ const StCard = styled.div`
   h3 {
     margin: 0;
   }
-
-  button {
-    height: 36px;
-    width: 80px;
-    border: 0px;
-    border-radius: 18px;
-    color: white;
-    background-color: #3466af;
-    cursor: pointer;
-
-    &:hover {
-      transform: scale(1.1);
-      transition: transform 0.2s ease-in-out;
-    }
-
-    &:disabled {
-      transform: scale(1);
-      background-color: #d0d0d0;
-      cursor: not-allowed;
-    }
-  }
 `;
-
 
 export const PokemonList = ({ MOCK_DATA, my, setMy, setPopup }) => {
   console.log(my);
 
-  const handleBtnClick = (url, name) => {
-    let found = false;
-
-    //포케몬 추가
-    setMy(
-      my.map((mon) => {
-        if (!found && !mon.filled && my.every((el) => el.url !== url)) {
-          //아직 못찾았고, 슬롯에 안 채워져있으면
-          found = true; //찾았다는 표시
-          return { url, name, filled: true }; //채워졌다고 변경
-        }
-        return mon; //빈 슬롯 찾았으면 나머지 그대로 반환
-      })
-    );
-
-    //모든 슬롯이 찬 경우 알림창
-    if (my.every((mon) => mon.filled)) {
-      alert("슬롯이 다 찼습니다!");
-    }
-  };
-  
   const handleImgClick = (data) => {
-    setPopup({...data, show:true})
-  }
+    setPopup({ ...data, show: true });
+  };
 
   return (
     <StDexBox>
@@ -92,15 +50,12 @@ export const PokemonList = ({ MOCK_DATA, my, setMy, setPopup }) => {
           return (
             <StCard key={pokemon.id}>
               <h3>{pokemon.korean_name}</h3>
-              <img onClick={() => handleImgClick(pokemon)} src={pokemon.img_url}></img>
-              <button
-                disabled={caught}
-                onClick={() =>
-                  handleBtnClick(pokemon.img_url, pokemon.korean_name)
-                }
-              >
-                {caught ? "잡음" : "잡기"}
-              </button>
+              <img
+                onClick={() => handleImgClick(pokemon)}
+                src={pokemon.img_url}
+                draggable="false"
+              ></img>
+              <AddBtn caught={caught} pokemon={pokemon} my={my} setMy={setMy} />
             </StCard>
           );
         })}

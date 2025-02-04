@@ -69,7 +69,7 @@ const Dashboard = ({ my, setMy, pokeball }) => {
               onClick={() => handleClick(mon.name)}
             >
               <StOverlay filled={mon.filled}>놓아주기</StOverlay>
-              <img key={idx} src={mon.url} />
+              <img key={idx} src={mon.url} draggable="false" />
               <p>{mon.name}</p>
             </StDashBox>
           );
