@@ -44,20 +44,22 @@ const StCard = styled.div`
       transform: scale(1.1);
       transition: transform 0.2s ease-in-out;
     }
-    
+
     &:disabled {
-    background-color: #d0d0d0;
-    cursor: not-allowed;
-  }
+      transform: scale(1);
+      background-color: #d0d0d0;
+      cursor: not-allowed;
+    }
   }
 `;
 
-export const PokemonList = ({ MOCK_DATA, my, setMy }) => {
-  console.log(my)
-  
-  const handleClick = (url, name) => {
+
+export const PokemonList = ({ MOCK_DATA, my, setMy, setPopup }) => {
+  console.log(my);
+
+  const handleBtnClick = (url, name) => {
     let found = false;
-    
+
     //포케몬 추가
     setMy(
       my.map((mon) => {
@@ -75,6 +77,10 @@ export const PokemonList = ({ MOCK_DATA, my, setMy }) => {
       alert("슬롯이 다 찼습니다!");
     }
   };
+  
+  const handleImgClick = (data) => {
+    setPopup({...data, show:true})
+  }
 
   return (
     <StDexBox>
@@ -86,10 +92,12 @@ export const PokemonList = ({ MOCK_DATA, my, setMy }) => {
           return (
             <StCard key={pokemon.id}>
               <h3>{pokemon.korean_name}</h3>
-              <img src={pokemon.img_url}></img>
+              <img onClick={() => handleImgClick(pokemon)} src={pokemon.img_url}></img>
               <button
                 disabled={caught}
-                onClick={() => handleClick(pokemon.img_url, pokemon.korean_name)}
+                onClick={() =>
+                  handleBtnClick(pokemon.img_url, pokemon.korean_name)
+                }
               >
                 {caught ? "잡음" : "잡기"}
               </button>

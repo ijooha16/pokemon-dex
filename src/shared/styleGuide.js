@@ -6,6 +6,8 @@ export const StBox = styled.div`
   height: 100%;
   width: 100%;
 
+  overflow: hidden;
+
   display: flex;
   flex-direction: ${(props) => props.flexDirection || "column"};
   justify-content: center;

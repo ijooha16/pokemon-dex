@@ -4,10 +4,10 @@ import { StBox, StDexBox, StH1 } from "../shared/styleGuide";
 const StDashBox = styled.div`
   height: 150px;
   display: flex;
-  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   cursor: ${(props) => (props.filled ? "pointer" : "not-allowed")};
 
   img {
