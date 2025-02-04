@@ -8,6 +8,7 @@ import pokeball from "../assets/pokeball.png";
 import Dashboard from "../components/Dashboard";
 import { PokemonList } from "../components/PokemonList";
 import { StBox } from "../shared/styleGuide";
+import AddBtn from "../components/AddBtn.jsx";
 
 const StLogoImg = styled.img`
   width: 300px;
@@ -73,6 +74,8 @@ const Dex = () => {
   const [my, setMy] = useState(initialMy);
   const [popup, setPopup] = useState(initialPopup)
   const navigator = useNavigate();
+  let caught = my.some((el) => el.url === popup.img_url);
+  
 
   const handlePopupClick = () => {
     setPopup({...popup, show:false})
@@ -82,6 +85,7 @@ const Dex = () => {
     <StBox show={popup.show} gap="30px">
       <StPopup onClick={handlePopupClick} show={popup.show}>
         <div>
+          <AddBtn caught={caught} pokemon={popup} my={my} setMy={setMy} />
           <img src={popup.img_url}/>
           <h2>{popup.korean_name}</h2>
           <p>{popup.types.join(' · ')}</p>

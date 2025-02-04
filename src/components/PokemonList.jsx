@@ -33,7 +33,7 @@ const StCard = styled.div`
   }
 `;
 
-export const PokemonList = ({ MOCK_DATA, my, setMy, setPopup }) => {
+export const PokemonList = ({  MOCK_DATA, my, setMy, setPopup }) => {
   console.log(my);
 
   const handleImgClick = (data) => {
