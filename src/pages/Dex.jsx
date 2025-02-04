@@ -54,7 +54,7 @@ const StPopup = styled.div`
     }
 
     p {
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       font-size: 20px;
       color: gray;
     }
@@ -85,10 +85,10 @@ const Dex = () => {
     <StBox show={popup.show} gap="30px">
       <StPopup onClick={handlePopupClick} show={popup.show}>
         <div>
-          <AddBtn caught={caught} pokemon={popup} my={my} setMy={setMy} />
           <img src={popup.img_url}/>
           <h2>{popup.korean_name}</h2>
           <p>{popup.types.join(' · ')}</p>
+          <AddBtn caught={caught} pokemon={popup} my={my} setMy={setMy} />
           <h4>{popup.description}</h4>
         </div>
       </StPopup>
