@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import AddBtn from "../components/AddBtn.jsx";
 
-
 const StPopup = styled.div`
   /* opacity: 0; */
   height: 100vh;
@@ -9,8 +8,7 @@ const StPopup = styled.div`
   z-index: 10;
 
   display: flex;
-  /* display: ${(props) =>
-    props.show ? "flex" : "none"}; */
+  /* display: ${(props) => (props.show ? "flex" : "none")}; */
   justify-content: center;
   align-items: center;
 
@@ -58,16 +56,16 @@ const StPopup = styled.div`
 `;
 
 const Popup = ({ popup, setPopup, my, setMy, closePopup }) => {
-    let caught = my.some((el) => el.url === popup.img_url);
+  let caught = my.some((el) => el.url === popup.img_url);
 
-    const handlePopupClick = () => {
-        closePopup()
-        setPopup({ ...popup});
-      };
-    
+  const handlePopupClick = () => {
+    closePopup();
+    setPopup({ ...popup });
+  };
+
   return (
     <>
-    <StPopup onClick={handlePopupClick}>
+      <StPopup onClick={handlePopupClick}>
         <div>
           <img src={popup.img_url} />
           <h2>{popup.korean_name}</h2>
@@ -75,8 +73,9 @@ const Popup = ({ popup, setPopup, my, setMy, closePopup }) => {
           <AddBtn caught={caught} pokemon={popup} my={my} setMy={setMy} />
           <h4>{popup.description}</h4>
         </div>
-      </StPopup></>
-  )
-}
+      </StPopup>
+    </>
+  );
+};
 
-export default Popup
+export default Popup;

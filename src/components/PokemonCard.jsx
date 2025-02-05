@@ -28,29 +28,31 @@ const StCard = styled.div`
   }
 `;
 
-const PokemonCard = ({  my, setMy, setPopup, openPopup }) => {
+const PokemonCard = ({ my, setMy, setPopup, openPopup }) => {
   const handleImgClick = (data) => {
-    openPopup()
-    setPopup({ ...data});
+    openPopup();
+    setPopup({ ...data });
   };
-  
-  return (
-    <>{MOCK_DATA.map((pokemon) => {
-              let caught = my.some((el) => el.url === pokemon.img_url);
-    
-              return (
-                <StCard key={pokemon.id}>
-                  <h3>{pokemon.korean_name}</h3>
-                  <img
-                    onClick={() => handleImgClick(pokemon)}
-                    src={pokemon.img_url}
-                    draggable="false"
-                  ></img>
-                  <AddBtn caught={caught} pokemon={pokemon} my={my} setMy={setMy} />
-                </StCard>
-              );
-            })}</>
-  )
-}
 
-export default PokemonCard
+  return (
+    <>
+      {MOCK_DATA.map((pokemon) => {
+        let caught = my.some((el) => el.url === pokemon.img_url);
+
+        return (
+          <StCard key={pokemon.id}>
+            <h3>{pokemon.korean_name}</h3>
+            <img
+              onClick={() => handleImgClick(pokemon)}
+              src={pokemon.img_url}
+              draggable="false"
+            ></img>
+            <AddBtn caught={caught} pokemon={pokemon} my={my} setMy={setMy} />
+          </StCard>
+        );
+      })}
+    </>
+  );
+};
+
+export default PokemonCard;

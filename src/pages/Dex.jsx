@@ -17,7 +17,7 @@ const StLogoImg = styled.img`
 const Dex = () => {
   const storage = () => {
     //로컬 스토리지 비어있으면 초기값 설정
-    if (localStorage.getItem("pokemonDex") === null) {
+    if (localStorage.getItem("pokemonDex").length < 6) {
       const initialMy = Array(6).fill({
         url: pokeball,
         name: "",
@@ -44,19 +44,31 @@ const Dex = () => {
   const navigator = useNavigate();
   const location = useLocation();
 
-  const isPopupOpen = new URLSearchParams(location.search).get("popup") === "open"; //팝업 열려있는지 확인
+  const isPopupOpen =
+    new URLSearchParams(location.search).get("popup") === "open"; //팝업 열려있는지 확인
   const openPopup = () => navigator("?popup=open"); //팝업 열기 페이지
   const closePopup = () => navigator(-1); //뒤로가기
 
   return (
     <StBox show={popup.show} gap="30px">
       {isPopupOpen && ( //팝업이 open으로 돼있으면 팝업 페이지 보이기
-        <Popup popup={popup} setPopup={setPopup} my={my} setMy={setMy} closePopup={closePopup} />
+        <Popup
+          popup={popup}
+          setPopup={setPopup}
+          my={my}
+          setMy={setMy}
+          closePopup={closePopup}
+        />
       )}
       {/* 홈화면으로 */}
-      <StLogoImg src={logo} onClick={() => navigator("/")} /> 
+      <StLogoImg src={logo} onClick={() => navigator("/")} />
       <Dashboard my={my} setMy={setMy} pokeball={pokeball} />
-      <PokemonList my={my} setMy={setMy} setPopup={setPopup} openPopup={openPopup} />
+      <PokemonList
+        my={my}
+        setMy={setMy}
+        setPopup={setPopup}
+        openPopup={openPopup}
+      />
     </StBox>
   );
 };

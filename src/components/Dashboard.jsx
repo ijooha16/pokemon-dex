@@ -49,14 +49,12 @@ const StOverlay = styled.div`
 `;
 
 const Dashboard = ({ my, setMy, pokeball }) => {
-  
-  
   const handleClick = (name) => {
     let newData = my.map((el) =>
       el.name === name ? { url: pokeball, name: "", filled: false } : el
-    )
+    );
     setMy(newData);
-    localStorage.setItem('pokemonDex', JSON.stringify(newData));
+    localStorage.setItem("pokemonDex", JSON.stringify(newData));
   };
 
   return (

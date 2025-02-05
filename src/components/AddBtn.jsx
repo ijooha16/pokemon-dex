@@ -35,7 +35,7 @@ const AddBtn = ({ caught, pokemon, setMy, my }) => {
         return { url, name, filled: true }; //채워졌다고 변경
       }
       return mon; //빈 슬롯 찾았으면 나머지 그대로 반환
-    })
+    });
 
     //포케몬 추가
     setMy(newData);
@@ -45,7 +45,7 @@ const AddBtn = ({ caught, pokemon, setMy, my }) => {
       alert("슬롯이 다 찼습니다!");
     }
 
-    localStorage.setItem('pokemonDex', JSON.stringify(newData));
+    localStorage.setItem("pokemonDex", JSON.stringify(newData));
   };
 
   return (
