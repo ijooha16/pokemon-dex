@@ -8,13 +8,12 @@ const StGrid = styled.div`
   gap: 40px;
 `;
 
-
-export const PokemonList = ({  my, setMy, setPopup, openPopup }) => {
+export const PokemonList = () => {
   return (
     <StDexBox>
       <StH1>Pokemon List</StH1>
       <StGrid flexDirection="row" gap="80px">
-        <PokemonCard my={my} setMy={setMy} setPopup={setPopup} openPopup={openPopup} />
+        <PokemonCard />
       </StGrid>
     </StDexBox>
   );

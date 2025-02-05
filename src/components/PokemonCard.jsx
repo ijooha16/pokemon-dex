@@ -1,6 +1,9 @@
 import AddBtn from "./AddBtn";
 import styled from "styled-components";
 import MOCK_DATA from "../assets/data";
+import { useContext } from "react";
+import { PokemonContext, POPUP } from "../shared/PokemonDexContext";
+import { useNavigate } from "react-router-dom";
 
 const StCard = styled.div`
   width: 200px;
@@ -28,29 +31,38 @@ const StCard = styled.div`
   }
 `;
 
-const PokemonCard = ({  my, setMy, setPopup, openPopup }) => {
-  const handleImgClick = (data) => {
-    openPopup()
-    setPopup({ ...data});
-  };
-  
-  return (
-    <>{MOCK_DATA.map((pokemon) => {
-              let caught = my.some((el) => el.url === pokemon.img_url);
-    
-              return (
-                <StCard key={pokemon.id}>
-                  <h3>{pokemon.korean_name}</h3>
-                  <img
-                    onClick={() => handleImgClick(pokemon)}
-                    src={pokemon.img_url}
-                    draggable="false"
-                  ></img>
-                  <AddBtn caught={caught} pokemon={pokemon} my={my} setMy={setMy} />
-                </StCard>
-              );
-            })}</>
-  )
-}
+const PokemonCard = () => {
+  const { state, dispatch } = useContext(PokemonContext);
+  const myPokemon = state.myPokemonData;
 
-export default PokemonCard
+  const navigator = useNavigate();
+  const openPopup = () => navigator("?popup=open"); //팝업 열기 페이지
+
+  const handleImgClick = (pokemon) => {
+    openPopup();
+    dispatch({ type: POPUP, payload: pokemon });
+  };
+
+  return (
+    <>
+      {MOCK_DATA.map((pokemon) => {
+        let caught = myPokemon.some((el) => el.name === pokemon.korean_name);
+        const data = [pokemon.img_url, pokemon.korean_name];
+
+        return (
+          <StCard key={pokemon.id}>
+            <h3>{pokemon.korean_name}</h3>
+            <img
+              onClick={() => handleImgClick(pokemon)}
+              src={pokemon.img_url}
+              draggable="false"
+            ></img>
+            <AddBtn caught={caught} data={data} />
+          </StCard>
+        );
+      })}
+    </>
+  );
+};
+
+export default PokemonCard;

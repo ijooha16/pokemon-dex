@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { PokemonContext, ADD } from "../shared/PokemonDexContext";
+import { useContext } from "react";
 
 const Button = styled.button`
   height: 36px;
@@ -21,35 +23,22 @@ const Button = styled.button`
   }
 `;
 
-const AddBtn = ({ caught, pokemon, setMy, my }) => {
-  const url = pokemon.img_url;
-  const name = pokemon.korean_name;
+const AddBtn = ({ caught, data }) => {
+  const { state, dispatch } = useContext(PokemonContext);
+  const myPokemon = state.myPokemonData;
 
-  const handleBtnClick = (url, name) => {
-    let found = false;
-
-    let newData = my.map((mon) => {
-      if (!found && !mon.filled && my.every((el) => el.url !== url)) {
-        //아직 못찾았고, 슬롯에 안 채워져있으면
-        found = true; //찾았다는 표시
-        return { url, name, filled: true }; //채워졌다고 변경
-      }
-      return mon; //빈 슬롯 찾았으면 나머지 그대로 반환
-    })
-
-    //포케몬 추가
-    setMy(newData);
+  const handleBtnClick = () => {
+    //data는 url, name 가진 배열
+    dispatch({ type: ADD, payload: { url: data[0], name: data[1] } });
 
     //모든 슬롯이 찬 경우 알림창
-    if (my.every((mon) => mon.filled)) {
+    if (myPokemon.every((mon) => mon.filled)) {
       alert("슬롯이 다 찼습니다!");
     }
-
-    localStorage.setItem('pokemonDex', JSON.stringify(newData));
   };
 
   return (
-    <Button disabled={caught} onClick={() => handleBtnClick(url, name)}>
+    <Button disabled={caught} onClick={handleBtnClick}>
       {caught ? "잡음" : "잡기"}
     </Button>
   );
