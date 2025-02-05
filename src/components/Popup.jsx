@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import AddBtn from "../components/AddBtn.jsx";
-
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { PokemonContext } from "../shared/PokemonDexContext";
 
 const StPopup = styled.div`
   /* opacity: 0; */
@@ -9,8 +11,7 @@ const StPopup = styled.div`
   z-index: 10;
 
   display: flex;
-  /* display: ${(props) =>
-    props.show ? "flex" : "none"}; */
+  /* display: ${(props) => (props.show ? "flex" : "none")}; */
   justify-content: center;
   align-items: center;
 
@@ -57,26 +58,32 @@ const StPopup = styled.div`
   }
 `;
 
-const Popup = ({ popup, setPopup, my, setMy, closePopup }) => {
-    let caught = my.some((el) => el.url === popup.img_url);
+const Popup = () => {
+  const { state } = useContext(PokemonContext);
+  const popData = state.popup;
+  const data = [popData.img_url, popData.korean_name];
 
-    const handlePopupClick = () => {
-        closePopup()
-        setPopup({ ...popup});
-      };
-    
+  let caught = state.myPokemonData.some((el) => el.url === popData.img_url);
+  const navigator = useNavigate();
+  const closePopup = () => navigator(-1); //뒤로가기
+
+  const handlePopupClick = () => {
+    closePopup();
+  };
+
   return (
     <>
-    <StPopup onClick={handlePopupClick}>
+      <StPopup onClick={handlePopupClick}>
         <div>
-          <img src={popup.img_url} />
-          <h2>{popup.korean_name}</h2>
-          <p>{popup.types.join(" · ")}</p>
-          <AddBtn caught={caught} pokemon={popup} my={my} setMy={setMy} />
-          <h4>{popup.description}</h4>
+          <img src={popData.img_url} />
+          <h2>{popData.korean_name}</h2>
+          <p>{popData.types.join(" · ")}</p>
+          <AddBtn caught={caught} data={data} />
+          <h4>{popData.description}</h4>
         </div>
-      </StPopup></>
-  )
-}
+      </StPopup>
+    </>
+  );
+};
 
-export default Popup
+export default Popup;

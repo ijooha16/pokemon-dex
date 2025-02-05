@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { StBox, StDexBox, StH1 } from "../shared/styleGuide";
+import { useContext } from "react";
+import { PokemonContext, REMOVE } from "../shared/PokemonDexContext";
 
 const StDashBox = styled.div`
   height: 150px;
@@ -48,27 +50,24 @@ const StOverlay = styled.div`
   }
 `;
 
-const Dashboard = ({ my, setMy, pokeball }) => {
-  
-  
-  const handleClick = (name) => {
-    let newData = my.map((el) =>
-      el.name === name ? { url: pokeball, name: "", filled: false } : el
-    )
-    setMy(newData);
-    localStorage.setItem('pokemonDex', JSON.stringify(newData));
+const Dashboard = () => {
+  const { state, dispatch } = useContext(PokemonContext);
+  const myPokemon = state.myPokemonData;
+
+  const handleClick = (mon) => {
+    dispatch({ type: REMOVE, payload: mon });
   };
 
   return (
     <StDexBox border="#3466AF">
       <StH1 color="#21386E">My Pokemons</StH1>
       <StBox flexDirection="row" gap="62px">
-        {my.map((mon, idx) => {
+        {myPokemon.map((mon, idx) => {
           return (
             <StDashBox
               filled={mon.filled}
               key={idx}
-              onClick={() => handleClick(mon.name)}
+              onClick={() => handleClick(mon)}
             >
               <StOverlay filled={mon.filled}>놓아주기</StOverlay>
               <img key={idx} src={mon.url} draggable="false" />
