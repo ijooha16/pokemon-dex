@@ -118,8 +118,6 @@ const Dex = () => {
       <PokemonList
         my={my}
         setMy={setMy}
-        MOCK_DATA={MOCK_DATA}
-        popup={popup}
         setPopup={setPopup}
       />
     </StBox>
