@@ -1,7 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
-
 
 import logo from "../assets/logo.png";
 import pokeball from "../assets/pokeball.png";
@@ -10,12 +9,10 @@ import { PokemonList } from "../components/PokemonList";
 import { StBox } from "../shared/styleGuide";
 import Popup from "../components/Popup";
 
-
 const StLogoImg = styled.img`
   width: 300px;
   margin-bottom: 60px;
 `;
-
 
 const Dex = () => {
   const storage = () => {
@@ -45,20 +42,21 @@ const Dex = () => {
   const [my, setMy] = useState(storage);
   const [popup, setPopup] = useState(initialPopup);
   const navigator = useNavigate();
+  const location = useLocation();
 
-
-
+  const isPopupOpen = new URLSearchParams(location.search).get("popup") === "open"; //팝업 열려있는지 확인
+  const openPopup = () => navigator("?popup=open"); //팝업 열기 페이지
+  const closePopup = () => navigator(-1); //뒤로가기
 
   return (
     <StBox show={popup.show} gap="30px">
-      <Popup popup={popup} setPopup={setPopup} my={my} setMy={setMy} />
-      <StLogoImg src={logo} onClick={() => navigator("/")} />
+      {isPopupOpen && ( //팝업이 open으로 돼있으면 팝업 페이지 보이기
+        <Popup popup={popup} setPopup={setPopup} my={my} setMy={setMy} closePopup={closePopup} />
+      )}
+      {/* 홈화면으로 */}
+      <StLogoImg src={logo} onClick={() => navigator("/")} /> 
       <Dashboard my={my} setMy={setMy} pokeball={pokeball} />
-      <PokemonList
-        my={my}
-        setMy={setMy}
-        setPopup={setPopup}
-      />
+      <PokemonList my={my} setMy={setMy} setPopup={setPopup} openPopup={openPopup} />
     </StBox>
   );
 };

@@ -8,8 +8,9 @@ const StPopup = styled.div`
   width: 100vw;
   z-index: 10;
 
-  display: ${(props) =>
-    props.show ? "flex" : "none"}; //여기 나중에 껐다 켰다 바꾸는 걸로 수정
+  display: flex;
+  /* display: ${(props) =>
+    props.show ? "flex" : "none"}; */
   justify-content: center;
   align-items: center;
 
@@ -56,16 +57,17 @@ const StPopup = styled.div`
   }
 `;
 
-const Popup = ({ popup, setPopup, my, setMy }) => {
+const Popup = ({ popup, setPopup, my, setMy, closePopup }) => {
     let caught = my.some((el) => el.url === popup.img_url);
 
     const handlePopupClick = () => {
-        setPopup({ ...popup, show: false });
+        closePopup()
+        setPopup({ ...popup});
       };
     
   return (
     <>
-    <StPopup onClick={handlePopupClick} show={popup.show}>
+    <StPopup onClick={handlePopupClick}>
         <div>
           <img src={popup.img_url} />
           <h2>{popup.korean_name}</h2>

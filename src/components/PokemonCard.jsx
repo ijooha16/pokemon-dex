@@ -28,9 +28,10 @@ const StCard = styled.div`
   }
 `;
 
-const PokemonCard = ({  my, setMy, setPopup }) => {
+const PokemonCard = ({  my, setMy, setPopup, openPopup }) => {
   const handleImgClick = (data) => {
-    setPopup({ ...data, show: true });
+    openPopup()
+    setPopup({ ...data});
   };
   
   return (
