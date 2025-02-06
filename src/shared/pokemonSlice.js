@@ -7,7 +7,7 @@ import pokeball from "../assets/pokeball.png";
 
 const initialState = {
   myPokemonData:
-    JSON.parse(localStorage.getItem("pokemonDex")).myPokemonData ||
+    JSON.parse(localStorage.getItem("pokemonDex")) ||
     Array(6).fill({
       url: pokeball,
       name: "",
