@@ -7,4 +7,11 @@ const store = configureStore({
     }
 })
 
+store.subscribe(() => {
+    localStorage.setItem(
+      "pokemonDex",
+      JSON.stringify({ myPokemonData: store.getState().pokemon.myPokemonData })
+    );
+  });
+
 export default store;
