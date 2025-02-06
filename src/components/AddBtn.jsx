@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux"
-import { ADD } from '../shared/pokemonSlice'
+import { ADD, ALERT } from '../shared/pokemonSlice'
 
 const Button = styled.button`
   height: 36px;
@@ -33,7 +33,7 @@ const AddBtn = ({ caught, data }) => {
     
     //모든 슬롯이 찬 경우 알림창
     if (myPokemon.every((mon) => mon.filled)) {
-      alert("슬롯이 다 찼습니다!");
+      dispatch(ALERT(true))
     }
   };
 
