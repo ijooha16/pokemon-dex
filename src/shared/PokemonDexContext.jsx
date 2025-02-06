@@ -1,6 +1,5 @@
 import { createContext, useReducer } from "react";
 import pokeball from "../assets/pokeball.png";
-import { useEffect } from "react";
 
 //대쉬보드에 추가
 //대쉬보드에서 삭제
@@ -8,6 +7,8 @@ import { useEffect } from "react";
 const ADD = "ADD";
 const REMOVE = "REMOVE";
 const POPUP = "POPUP";
+const FULLALERT = "FULLALERT";
+const EXISTALERT = "EXISTALERT";
 
 const initialState = {
   myPokemonData:
@@ -17,6 +18,7 @@ const initialState = {
       name: "",
       filled: false,
     }),
+  alert: { full: false, exist: false },
   popup: {
     img_url: "",
     korean_name: "",
@@ -25,8 +27,6 @@ const initialState = {
     description: "",
   },
 };
-
-
 
 //reducer 함수
 //자리 비었는지 확인
@@ -43,9 +43,8 @@ const reducer = (state, action) => {
     ) {
       //아직 못찾았고, 슬롯에 안 채워져있으면
       found = true; //찾았다는 표시
-      
+
       return { ...action.payload, filled: true }; //채워졌다고 변경
-      
     }
     return pokemon; //빈 슬롯 찾았으면 나머지 그대로 반환
   });
@@ -63,10 +62,12 @@ const reducer = (state, action) => {
       return { ...state, myPokemonData: remove };
     case POPUP: //모든 값 객체
       return { ...state, popup: action.payload };
+    case FULLALERT: //모든 값 객체
+      return { ...state, alert: { full: action.payload, exist: false } };
+    case EXISTALERT: //모든 값 객체
+      return { ...state, alert: { full: false, exist: action.payload } };
   }
 };
-
-
 
 const PokemonContext = createContext();
 
@@ -81,4 +82,4 @@ const PokemonProvider = ({ children }) => {
   );
 };
 
-export { PokemonContext, PokemonProvider, ADD, REMOVE, POPUP };
+export { PokemonContext, PokemonProvider, ADD, REMOVE, POPUP, FULLALERT, EXISTALERT };

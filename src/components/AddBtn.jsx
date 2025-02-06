@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PokemonContext, ADD } from "../shared/PokemonDexContext";
+import { PokemonContext, ADD, FULLALERT, EXISTALERT } from "../shared/PokemonDexContext";
 import { useContext } from "react";
 
 const Button = styled.button`
@@ -8,18 +8,12 @@ const Button = styled.button`
   border: 0px;
   border-radius: 18px;
   color: white;
-  background-color: #3466af;
+  background-color: ${props => props.caught ? '#d0d0d0' : '#3466af'};
   cursor: pointer;
 
   &:hover {
-    transform: scale(1.1);
+    transform: ${props => props.caught ? 'scale(1)' : 'scale(1.1)'};
     transition: transform 0.2s ease-in-out;
-  }
-
-  &:disabled {
-    transform: scale(1);
-    background-color: #d0d0d0;
-    cursor: not-allowed;
   }
 `;
 
@@ -32,14 +26,19 @@ const AddBtn = ({ data }) => {
     //data는 url, name 가진 배열
     dispatch({ type: ADD, payload: { url: data[0], name: data[1] } });
 
-    //모든 슬롯이 찬 경우 알림창
+    //모든 슬롯이 찬 경우 state.alert 변경
     if (myPokemon.every((mon) => mon.filled)) {
-      alert("슬롯이 다 찼습니다!");
+      dispatch({type:FULLALERT, payload: true});
+    }
+
+    //이미 잡은 포켓몬인 경우
+    if (caught) {
+      dispatch({type:EXISTALERT, payload: true});
     }
   };
 
   return (
-    <Button disabled={caught} onClick={handleBtnClick}>
+    <Button caught={caught} onClick={handleBtnClick}>
       {caught ? "잡음" : "잡기"}
     </Button>
   );
