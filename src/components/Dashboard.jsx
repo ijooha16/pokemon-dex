@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { StBox, StDexBox, StH1 } from "../shared/styleGuide";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { PokemonContext, REMOVE } from "../shared/PokemonDexContext";
-import { useEffect } from "react";
 
 const StDashBox = styled.div`
   height: 150px;
@@ -55,10 +54,10 @@ const Dashboard = () => {
   const { state, dispatch } = useContext(PokemonContext);
   const myPokemon = state.myPokemonData;
 
-          //로컬스토리지에 저장
-          useEffect(() => {
-            localStorage.setItem("pokemonDex", JSON.stringify(state.myPokemonData));
-          }, [state.myPokemonData]);
+  //로컬스토리지에 저장
+  useEffect(() => {
+    localStorage.setItem("pokemonDex", JSON.stringify(state.myPokemonData));
+  }, [state.myPokemonData]);
 
   const handleClick = (mon) => {
     dispatch({ type: REMOVE, payload: mon });

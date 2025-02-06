@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../assets/logo.png";
 import { StBox } from "../shared/styleGuide";
+import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 const StImg = styled.img`
   width: 600px;

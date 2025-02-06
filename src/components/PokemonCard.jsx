@@ -1,9 +1,9 @@
-import AddBtn from "./AddBtn";
 import styled from "styled-components";
-import MOCK_DATA from "../assets/data";
 import { useContext } from "react";
 import { PokemonContext, POPUP } from "../shared/PokemonDexContext";
 import { useNavigate } from "react-router-dom";
+import AddBtn from "./AddBtn";
+import MOCK_DATA from "../assets/data";
 
 const StCard = styled.div`
   width: 200px;

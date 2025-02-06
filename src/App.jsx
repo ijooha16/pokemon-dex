@@ -1,14 +1,13 @@
-import './App.css'
-import Router from './shared/Router'
-import { PokemonProvider } from '../src/shared/PokemonDexContext'
-
+import "./App.css";
+import Router from "./shared/Router";
+import { PokemonProvider } from "../src/shared/PokemonDexContext";
 
 function App() {
   return (
     <PokemonProvider>
-      <Router/>
+      <Router />
     </PokemonProvider>
-  )
+  );
 }
 
-export default App
+export default App;

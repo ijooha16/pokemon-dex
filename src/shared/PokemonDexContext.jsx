@@ -82,4 +82,12 @@ const PokemonProvider = ({ children }) => {
   );
 };
 
-export { PokemonContext, PokemonProvider, ADD, REMOVE, POPUP, FULLALERT, EXISTALERT };
+export {
+  PokemonContext,
+  PokemonProvider,
+  ADD,
+  REMOVE,
+  POPUP,
+  FULLALERT,
+  EXISTALERT,
+};

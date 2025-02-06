@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import AddBtn from "../components/AddBtn.jsx";
-import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { PokemonContext } from "../shared/PokemonDexContext";
+import AddBtn from "../components/AddBtn.jsx";
 
 const StPopup = styled.div`
   /* opacity: 0; */

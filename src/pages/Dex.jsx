@@ -1,16 +1,19 @@
-import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { StBox } from "../shared/styleGuide";
+import { useLocation } from "react-router-dom";
+import { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 import logo from "../assets/logo.png";
 import Dashboard from "../components/Dashboard";
 import { PokemonList } from "../components/PokemonList";
-import { StBox } from "../shared/styleGuide";
 import Popup from "../components/Popup";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { PokemonContext, FULLALERT, EXISTALERT } from "../shared/PokemonDexContext";
-import { useContext } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import {
+  PokemonContext,
+  FULLALERT,
+  EXISTALERT,
+} from "../shared/PokemonDexContext";
 
 const StLogoImg = styled.img`
   width: 300px;
@@ -25,19 +28,19 @@ const Dex = () => {
   const navigator = useNavigate();
 
   const { state, dispatch } = useContext(PokemonContext);
-  const alert = state.alert
+  const alert = state.alert;
 
   useEffect(() => {
     if (alert.full) {
-      toast.warn('포켓몬 슬롯이 가득 찼어요!'); //state.alert = true면 알림창
-      dispatch({type:FULLALERT, payload: false}); //초기화
+      toast.warn("포켓몬 슬롯이 가득 찼어요!"); //state.alert = true면 알림창
+      dispatch({ type: FULLALERT, payload: false }); //초기화
     }
 
     if (alert.exist) {
-      toast.error('이미 잡은 포켓몬이예요!')
-      dispatch({type:EXISTALERT, payload: false});
+      toast.error("이미 잡은 포켓몬이예요!");
+      dispatch({ type: EXISTALERT, payload: false });
     }
-  },);
+  });
 
   return (
     <StBox gap="30px">
