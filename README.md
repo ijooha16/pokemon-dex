@@ -1,0 +1,1 @@
+prop-drilling으로 만든 Pokemon Dex입니다.
