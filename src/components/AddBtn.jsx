@@ -17,9 +17,10 @@ const Button = styled.button`
   }
 `;
 
-const AddBtn = ({ caught, data }) => {
+const AddBtn = ({ data }) => {
   const dispatch = useDispatch();
   const myPokemon = useSelector((state) => state.pokemon.myPokemonData);
+  const caught = myPokemon.some((el) => el.name === data[1])
 
   const handleBtnClick = () => {
     //data는 url, name 가진 배열

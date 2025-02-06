@@ -46,7 +46,6 @@ const PokemonCard = () => {
   return (
     <>
       {MOCK_DATA.map((pokemon) => {
-        let caught = myPokemon.some((el) => el.name === pokemon.korean_name);
         const data = [pokemon.img_url, pokemon.korean_name];
 
         return (
@@ -57,7 +56,7 @@ const PokemonCard = () => {
               src={pokemon.img_url}
               draggable="false"
             ></img>
-            <AddBtn caught={caught} data={data} />
+            <AddBtn data={data} />
           </StCard>
         );
       })}
