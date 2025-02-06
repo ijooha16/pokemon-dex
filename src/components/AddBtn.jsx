@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { PokemonContext, ADD } from "../shared/PokemonDexContext";
 import { useContext } from "react";
-import { useEffect } from "react";
 
 const Button = styled.button`
   height: 36px;
@@ -24,9 +23,10 @@ const Button = styled.button`
   }
 `;
 
-const AddBtn = ({ caught, data }) => {
+const AddBtn = ({ data }) => {
   const { state, dispatch } = useContext(PokemonContext);
   const myPokemon = state.myPokemonData;
+  const caught = myPokemon.some((el) => el.name === data[1])
 
   const handleBtnClick = () => {
     //data는 url, name 가진 배열

@@ -63,7 +63,6 @@ const Popup = () => {
   const popData = state.popup;
   const data = [popData.img_url, popData.korean_name];
 
-  let caught = state.myPokemonData.some((el) => el.url === popData.img_url);
   const navigator = useNavigate();
   const closePopup = () => navigator(-1); //뒤로가기
 
@@ -78,7 +77,7 @@ const Popup = () => {
           <img src={popData.img_url} />
           <h2>{popData.korean_name}</h2>
           <p>{popData.types.join(" · ")}</p>
-          <AddBtn caught={caught} data={data} />
+          <AddBtn data={data} />
           <h4>{popData.description}</h4>
         </div>
       </StPopup>
