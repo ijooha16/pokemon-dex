@@ -1,9 +1,9 @@
-import AddBtn from "./AddBtn";
 import styled from "styled-components";
-import MOCK_DATA from "../assets/data";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux"
-import { POPUP } from '../shared/pokemonSlice'
+import { useDispatch } from "react-redux";
+import { POPUP } from "../shared/pokemonSlice";
+import MOCK_DATA from "../assets/data";
+import AddBtn from "./AddBtn";
 
 const StCard = styled.div`
   width: 200px;
@@ -32,9 +32,7 @@ const StCard = styled.div`
 `;
 
 const PokemonCard = () => {
-  const dispatch = useDispatch()
-  const myPokemon = useSelector(state => state.pokemon.myPokemonData)
-
+  const dispatch = useDispatch();
   const navigator = useNavigate();
   const openPopup = () => navigator("?popup=open"); //팝업 열기 페이지
 

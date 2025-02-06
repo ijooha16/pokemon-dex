@@ -8,11 +8,11 @@ const Button = styled.button`
   border: 0px;
   border-radius: 18px;
   color: white;
-  background-color: ${props => props.caught ? '#d0d0d0' : '#3466af'};
+  background-color: ${(props) => (props.caught ? "#d0d0d0" : "#3466af")};
   cursor: pointer;
 
   &:hover {
-    transform: ${props => props.caught ? 'scale(1)' : 'scale(1.1)'};
+    transform: ${(props) => (props.caught ? "scale(1)" : "scale(1.1)")};
     transition: transform 0.2s ease-in-out;
   }
 `;
@@ -20,7 +20,7 @@ const Button = styled.button`
 const AddBtn = ({ data }) => {
   const dispatch = useDispatch();
   const myPokemon = useSelector((state) => state.pokemon.myPokemonData);
-  const caught = myPokemon.some((el) => el.name === data[1])
+  const caught = myPokemon.some((el) => el.name === data[1]);
 
   const handleBtnClick = () => {
     //data는 url, name 가진 배열

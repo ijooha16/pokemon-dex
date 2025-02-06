@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 import pokeball from "../assets/pokeball.png";
 
 //initialState
@@ -13,7 +12,7 @@ const initialState = {
       name: "",
       filled: false,
     }),
-  alert: {full: false, exist:false},
+  alert: { full: false, exist: false },
   popup: {
     img_url: "",
     korean_name: "",
@@ -61,13 +60,14 @@ const pokemonSlice = createSlice({
       return { ...state, popup: action.payload };
     },
     FULLALERT: (state, action) => {
-      return { ...state, alert: {full: action.payload, exist: false} };
+      return { ...state, alert: { full: action.payload, exist: false } };
     },
     EXISTALERT: (state, action) => {
-      return {...state, alert: {full: false, exist: action.payload}}
-    }
+      return { ...state, alert: { full: false, exist: action.payload } };
+    },
   },
 });
 
-export const { ADD, REMOVE, POPUP, FULLALERT, EXISTALERT } = pokemonSlice.actions;
+export const { ADD, REMOVE, POPUP, FULLALERT, EXISTALERT } =
+  pokemonSlice.actions;
 export default pokemonSlice.reducer;

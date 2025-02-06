@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import AddBtn from "../components/AddBtn.jsx";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 
 const StPopup = styled.div`
   /* opacity: 0; */
@@ -58,7 +58,7 @@ const StPopup = styled.div`
 `;
 
 const Popup = () => {
-  const popData = useSelector(state => state.pokemon.popup)
+  const popData = useSelector((state) => state.pokemon.popup);
   const data = [popData.img_url, popData.korean_name];
 
   const navigator = useNavigate();
