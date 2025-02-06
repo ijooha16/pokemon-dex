@@ -1,7 +1,7 @@
 <!-- ####### 헤더 -->
 
 # ⚡️ Pokemon : Pokemon Dex
-https://ijooha16.github.io/Judie-Movie/
+https://pokemon-dex-three.vercel.app/
 
 <br/>
 
