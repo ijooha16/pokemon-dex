@@ -7,10 +7,11 @@ const store = configureStore({
     }
 })
 
+//로컬스토리지 동기화
 store.subscribe(() => {
     localStorage.setItem(
       "pokemonDex",
-      JSON.stringify({ myPokemonData: store.getState().pokemon.myPokemonData })
+      JSON.stringify(store.getState().pokemon.myPokemonData )
     );
   });
 
