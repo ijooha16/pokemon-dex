@@ -28,7 +28,8 @@ const StCard = styled.div`
   }
 `;
 
-const PokemonCard = ({ my, setMy, setPopup, openPopup }) => {
+const PokemonCard = ({ my, setMy, setPopup, openPopup, setAlert }) => {
+  
   const handleImgClick = (data) => {
     openPopup();
     setPopup({ ...data });
@@ -37,8 +38,6 @@ const PokemonCard = ({ my, setMy, setPopup, openPopup }) => {
   return (
     <>
       {MOCK_DATA.map((pokemon) => {
-        let caught = my.some((el) => el.url === pokemon.img_url);
-
         return (
           <StCard key={pokemon.id}>
             <h3>{pokemon.korean_name}</h3>
@@ -47,7 +46,7 @@ const PokemonCard = ({ my, setMy, setPopup, openPopup }) => {
               src={pokemon.img_url}
               draggable="false"
             ></img>
-            <AddBtn caught={caught} pokemon={pokemon} my={my} setMy={setMy} />
+            <AddBtn pokemon={pokemon} my={my} setMy={setMy} setAlert={setAlert} />
           </StCard>
         );
       })}

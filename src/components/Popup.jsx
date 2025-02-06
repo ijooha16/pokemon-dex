@@ -55,9 +55,7 @@ const StPopup = styled.div`
   }
 `;
 
-const Popup = ({ popup, setPopup, my, setMy, closePopup }) => {
-  let caught = my.some((el) => el.url === popup.img_url);
-
+const Popup = ({ popup, setPopup, my, setMy, closePopup, setAlert }) => {
   const handlePopupClick = () => {
     closePopup();
     setPopup({ ...popup });
@@ -70,7 +68,7 @@ const Popup = ({ popup, setPopup, my, setMy, closePopup }) => {
           <img src={popup.img_url} />
           <h2>{popup.korean_name}</h2>
           <p>{popup.types.join(" · ")}</p>
-          <AddBtn caught={caught} pokemon={popup} my={my} setMy={setMy} />
+          <AddBtn pokemon={popup} my={my} setMy={setMy} setAlert={setAlert} />
           <h4>{popup.description}</h4>
         </div>
       </StPopup>

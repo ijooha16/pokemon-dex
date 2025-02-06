@@ -8,6 +8,8 @@ import Dashboard from "../components/Dashboard";
 import { PokemonList } from "../components/PokemonList";
 import { StBox } from "../shared/styleGuide";
 import Popup from "../components/Popup";
+import { ToastContainer, toast } from "react-toastify";
+import { useEffect } from "react";
 
 const StLogoImg = styled.img`
   width: 300px;
@@ -30,7 +32,7 @@ const Dex = () => {
     return JSON.parse(localStorage.getItem("pokemonDex"));
   };
 
-  //초기 상태, 객체 6개, 기본이미지
+  //popup 초기값, 객체 6개, 기본이미지
   const initialPopup = {
     img_url: "",
     korean_name: "",
@@ -39,8 +41,15 @@ const Dex = () => {
     description: "",
   };
 
+  //alert 초기값
+  const initialAlert = {
+    full: false,
+    exist: false,
+  };
+
   const [my, setMy] = useState(storage);
   const [popup, setPopup] = useState(initialPopup);
+  const [alert, setAlert] = useState(initialAlert);
   const navigator = useNavigate();
   const location = useLocation();
 
@@ -49,8 +58,35 @@ const Dex = () => {
   const openPopup = () => navigator("?popup=open"); //팝업 열기 페이지
   const closePopup = () => navigator(-1); //뒤로가기
 
+  useEffect(() => {
+    if (alert.full) {
+      toast.warn("포켓몬 슬롯이 가득 찼어요!"); //state.alert = true면 알림창
+      setAlert({ full: false, exist: false }); //초기화
+    }
+
+    if (alert.exist) {
+      toast.error("이미 잡은 포켓몬이예요!");
+      setAlert({ full: false, exist: false });
+    }
+  }, [alert]);
+
+  
+  
   return (
     <StBox show={popup.show} gap="30px">
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme="colored"
+        // transition={Bounce}
+      />
       {isPopupOpen && ( //팝업이 open으로 돼있으면 팝업 페이지 보이기
         <Popup
           popup={popup}
@@ -58,16 +94,23 @@ const Dex = () => {
           my={my}
           setMy={setMy}
           closePopup={closePopup}
+          setAlert={setAlert}
         />
       )}
       {/* 홈화면으로 */}
       <StLogoImg src={logo} onClick={() => navigator("/")} />
-      <Dashboard my={my} setMy={setMy} pokeball={pokeball} />
+      <Dashboard
+        my={my}
+        setMy={setMy}
+        pokeball={pokeball}
+        
+      />
       <PokemonList
         my={my}
         setMy={setMy}
         setPopup={setPopup}
         openPopup={openPopup}
+        setAlert={setAlert}
       />
     </StBox>
   );

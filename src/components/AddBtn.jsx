@@ -6,24 +6,19 @@ const Button = styled.button`
   border: 0px;
   border-radius: 18px;
   color: white;
-  background-color: #3466af;
+  background-color: ${(props) => (props.caught ? "#d0d0d0" : "#3466af")};
   cursor: pointer;
 
   &:hover {
-    transform: scale(1.1);
+    transform: ${(props) => (props.caught ? "scale(1)" : "scale(1.1)")};
     transition: transform 0.2s ease-in-out;
-  }
-
-  &:disabled {
-    transform: scale(1);
-    background-color: #d0d0d0;
-    cursor: not-allowed;
   }
 `;
 
-const AddBtn = ({ caught, pokemon, setMy, my }) => {
+const AddBtn = ({ pokemon, setMy, my, setAlert }) => {
   const url = pokemon.img_url;
   const name = pokemon.korean_name;
+  const caught = my.some((el) => el.url === url);
 
   const handleBtnClick = (url, name) => {
     let found = false;
@@ -42,14 +37,19 @@ const AddBtn = ({ caught, pokemon, setMy, my }) => {
 
     //모든 슬롯이 찬 경우 알림창
     if (my.every((mon) => mon.filled)) {
-      alert("슬롯이 다 찼습니다!");
+      setAlert({ full: true, exist: false });
+    }
+
+    //이미 잡은 포켓몬인 경우
+    if (caught) {
+      setAlert({ full: false, exist: true });
     }
 
     localStorage.setItem("pokemonDex", JSON.stringify(newData));
   };
 
   return (
-    <Button disabled={caught} onClick={() => handleBtnClick(url, name)}>
+    <Button caught={caught} onClick={() => handleBtnClick(url, name)}>
       {caught ? "잡음" : "잡기"}
     </Button>
   );

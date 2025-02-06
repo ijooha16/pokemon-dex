@@ -8,7 +8,9 @@ const StGrid = styled.div`
   gap: 40px;
 `;
 
-export const PokemonList = ({ my, setMy, setPopup, openPopup }) => {
+export const PokemonList = ({ my, setMy, setPopup, openPopup, setAlert }) => {
+
+  
   return (
     <StDexBox>
       <StH1>Pokemon List</StH1>
@@ -18,6 +20,7 @@ export const PokemonList = ({ my, setMy, setPopup, openPopup }) => {
           setMy={setMy}
           setPopup={setPopup}
           openPopup={openPopup}
+          setAlert={setAlert}
         />
       </StGrid>
     </StDexBox>
