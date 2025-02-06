@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { StBox, StDexBox, StH1 } from "../shared/styleGuide";
-import { useContext } from "react";
-import { PokemonContext, REMOVE } from "../shared/PokemonDexContext";
+import { useDispatch, useSelector } from "react-redux"
+import { REMOVE } from '../shared/pokemonSlice'
 
 const StDashBox = styled.div`
   height: 150px;
@@ -51,11 +51,11 @@ const StOverlay = styled.div`
 `;
 
 const Dashboard = () => {
-  const { state, dispatch } = useContext(PokemonContext);
-  const myPokemon = state.myPokemonData;
+  const dispatch = useDispatch()
+  const myPokemon = useSelector(state => state.pokemon.myPokemonData)
 
   const handleClick = (mon) => {
-    dispatch({ type: REMOVE, payload: mon });
+    dispatch(REMOVE(mon));
   };
 
   return (

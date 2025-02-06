@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { PokemonContext, ADD } from "../shared/PokemonDexContext";
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux"
+import { ADD } from '../shared/pokemonSlice'
 
 const Button = styled.button`
   height: 36px;
@@ -24,13 +24,15 @@ const Button = styled.button`
 `;
 
 const AddBtn = ({ caught, data }) => {
-  const { state, dispatch } = useContext(PokemonContext);
-  const myPokemon = state.myPokemonData;
-
+  const dispatch = useDispatch()
+  const myPokemon = useSelector(state => state.pokemon.myPokemonData)
+  
   const handleBtnClick = () => {
     //data는 url, name 가진 배열
-    dispatch({ type: ADD, payload: { url: data[0], name: data[1] } });
-
+    dispatch(ADD({ url: data[0], name: data[1] }));
+    
+    console.log(JSON.parse(localStorage.getItem("pokemonDex")).myPokemonData)
+    
     //모든 슬롯이 찬 경우 알림창
     if (myPokemon.every((mon) => mon.filled)) {
       alert("슬롯이 다 찼습니다!");

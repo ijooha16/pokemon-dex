@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import AddBtn from "../components/AddBtn.jsx";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { PokemonContext } from "../shared/PokemonDexContext";
+import { useSelector } from "react-redux"
 
 const StPopup = styled.div`
   /* opacity: 0; */
@@ -59,11 +58,11 @@ const StPopup = styled.div`
 `;
 
 const Popup = () => {
-  const { state } = useContext(PokemonContext);
-  const popData = state.popup;
+  const myPokemonData = useSelector(state => state.pokemon.myPokemonData)
+  const popData = useSelector(state => state.pokemon.popup)
   const data = [popData.img_url, popData.korean_name];
 
-  let caught = state.myPokemonData.some((el) => el.url === popData.img_url);
+  let caught = myPokemonData.some((el) => el.url === popData.img_url);
   const navigator = useNavigate();
   const closePopup = () => navigator(-1); //뒤로가기
 
