@@ -9,7 +9,7 @@ import Popup from "../components/Popup";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { ALERT } from "../shared/pokemonSlice";
+import { FULLALERT, EXISTALERT } from "../shared/pokemonSlice";
 import { useEffect } from "react";
 
 const StLogoImg = styled.img`
@@ -27,19 +27,23 @@ const Dex = () => {
   const dispatch = useDispatch();
   const alert = useSelector(state => state.pokemon.alert)
 
-
   useEffect(() => {
-    if (alert) {
-      toast.warn('포켓몬 슬롯이 가득 찼어요!');
-      dispatch(ALERT(false));
+    if (alert.full) {
+      toast.warn('포켓몬 슬롯이 가득 찼어요!'); //state.alert = true면 알림창
+      dispatch(FULLALERT(false)); //초기화
     }
-  });
+
+    if (alert.exist) {
+      toast.error('이미 잡은 포켓몬이예요!')
+      dispatch(EXISTALERT(false))
+    }
+  },);
 
   return (
     <StBox gap="30px">
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop
         closeOnClick={false}

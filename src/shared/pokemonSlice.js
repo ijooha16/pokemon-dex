@@ -13,7 +13,7 @@ const initialState = {
       name: "",
       filled: false,
     }),
-  alert: false,
+  alert: {full: false, exist:false},
   popup: {
     img_url: "",
     korean_name: "",
@@ -60,11 +60,14 @@ const pokemonSlice = createSlice({
     POPUP: (state, action) => {
       return { ...state, popup: action.payload };
     },
-    ALERT: (state, action) => {
-      return { ...state, alert: action.payload };
+    FULLALERT: (state, action) => {
+      return { ...state, alert: {full: action.payload, exist: false} };
     },
+    EXISTALERT: (state, action) => {
+      return {...state, alert: {full: false, exist: action.payload}}
+    }
   },
 });
 
-export const { ADD, REMOVE, POPUP, ALERT } = pokemonSlice.actions;
+export const { ADD, REMOVE, POPUP, FULLALERT, EXISTALERT } = pokemonSlice.actions;
 export default pokemonSlice.reducer;
