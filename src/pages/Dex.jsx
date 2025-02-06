@@ -1,15 +1,14 @@
-import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useState } from "react";
+import { StBox } from "../shared/styleGuide";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 import logo from "../assets/logo.png";
 import pokeball from "../assets/pokeball.png";
 import Dashboard from "../components/Dashboard";
 import { PokemonList } from "../components/PokemonList";
-import { StBox } from "../shared/styleGuide";
 import Popup from "../components/Popup";
-import { ToastContainer, toast } from "react-toastify";
-import { useEffect } from "react";
 
 const StLogoImg = styled.img`
   width: 300px;
@@ -70,8 +69,6 @@ const Dex = () => {
     }
   }, [alert]);
 
-  
-  
   return (
     <StBox show={popup.show} gap="30px">
       <ToastContainer
@@ -99,12 +96,7 @@ const Dex = () => {
       )}
       {/* 홈화면으로 */}
       <StLogoImg src={logo} onClick={() => navigator("/")} />
-      <Dashboard
-        my={my}
-        setMy={setMy}
-        pokeball={pokeball}
-        
-      />
+      <Dashboard my={my} setMy={setMy} pokeball={pokeball} />
       <PokemonList
         my={my}
         setMy={setMy}

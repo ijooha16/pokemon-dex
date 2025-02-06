@@ -1,5 +1,5 @@
-import AddBtn from "./AddBtn";
 import styled from "styled-components";
+import AddBtn from "./AddBtn";
 import MOCK_DATA from "../assets/data";
 
 const StCard = styled.div`
@@ -29,7 +29,6 @@ const StCard = styled.div`
 `;
 
 const PokemonCard = ({ my, setMy, setPopup, openPopup, setAlert }) => {
-  
   const handleImgClick = (data) => {
     openPopup();
     setPopup({ ...data });
@@ -46,7 +45,12 @@ const PokemonCard = ({ my, setMy, setPopup, openPopup, setAlert }) => {
               src={pokemon.img_url}
               draggable="false"
             ></img>
-            <AddBtn pokemon={pokemon} my={my} setMy={setMy} setAlert={setAlert} />
+            <AddBtn
+              pokemon={pokemon}
+              my={my}
+              setMy={setMy}
+              setAlert={setAlert}
+            />
           </StCard>
         );
       })}

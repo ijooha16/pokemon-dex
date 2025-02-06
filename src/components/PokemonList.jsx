@@ -9,8 +9,6 @@ const StGrid = styled.div`
 `;
 
 export const PokemonList = ({ my, setMy, setPopup, openPopup, setAlert }) => {
-
-  
   return (
     <StDexBox>
       <StH1>Pokemon List</StH1>
