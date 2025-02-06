@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { PokemonContext, ADD } from "../shared/PokemonDexContext";
 import { useContext } from "react";
+import { useEffect } from "react";
 
 const Button = styled.button`
   height: 36px;

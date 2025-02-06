@@ -11,7 +11,7 @@ const POPUP = "POPUP";
 
 const initialState = {
   myPokemonData:
-    JSON.parse(localStorage.getItem("pokemonDex")).myPokemonData ||
+    JSON.parse(localStorage.getItem("pokemonDex")) ||
     Array(6).fill({
       url: pokeball,
       name: "",
@@ -25,6 +25,8 @@ const initialState = {
     description: "",
   },
 };
+
+
 
 //reducer 함수
 //자리 비었는지 확인
@@ -41,7 +43,9 @@ const reducer = (state, action) => {
     ) {
       //아직 못찾았고, 슬롯에 안 채워져있으면
       found = true; //찾았다는 표시
+      
       return { ...action.payload, filled: true }; //채워졌다고 변경
+      
     }
     return pokemon; //빈 슬롯 찾았으면 나머지 그대로 반환
   });
@@ -61,6 +65,8 @@ const reducer = (state, action) => {
       return { ...state, popup: action.payload };
   }
 };
+
+
 
 const PokemonContext = createContext();
 
