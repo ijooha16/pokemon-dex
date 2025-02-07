@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { POPUP } from "../shared/pokemonSlice";
+import { POPUP } from "../redux/modules/pokemonSlice";
 import MOCK_DATA from "../assets/data";
 import AddBtn from "./AddBtn";
 

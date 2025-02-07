@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD, FULLALERT, EXISTALERT } from "../shared/pokemonSlice";
+import { ADD, FULLALERT, EXISTALERT } from "../redux/modules/pokemonSlice";
 
 const Button = styled.button`
   height: 36px;

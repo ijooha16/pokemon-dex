@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import pokeball from "../assets/pokeball.png";
+import pokeball from "../../assets/pokeball.png"
 
 //initialState
 //createSlice (name, initialState, reducers)
