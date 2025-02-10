@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { POPUP } from "../redux/modules/pokemonSlice";
-import MOCK_DATA from "../assets/data";
-import AddBtn from "./AddBtn";
+import { POPUP } from "../redux/modules/pokemonSlice.js";
+import MOCK_DATA from "../assets/data.js";
+import AddBtn from "./AddBtn.jsx";
 
 const StCard = styled.div`
   width: 200px;

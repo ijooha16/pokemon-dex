@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { StBox, StDexBox, StH1 } from "../shared/styleGuide";
+import { StBox, StDexBox, StH1 } from "../shared/styleGuide.js";
 import { useDispatch, useSelector } from "react-redux";
-import { REMOVE } from "../redux/modules/pokemonSlice";
+import { REMOVE } from "../redux/modules/pokemonSlice.js";
 
 const StDashBox = styled.div`
   height: 150px;

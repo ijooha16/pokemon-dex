@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StBox } from "../shared/styleGuide";
+import { StBox } from "../shared/styleGuide.js";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 

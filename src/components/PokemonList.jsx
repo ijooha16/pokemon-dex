@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { StDexBox, StH1 } from "../shared/styleGuide";
-import PokemonCard from "./PokemonCard";
+import { StDexBox, StH1 } from "../shared/styleGuide.js";
+import PokemonCard from "./PokemonCard.jsx";
 
 const StGrid = styled.div`
   display: grid;
