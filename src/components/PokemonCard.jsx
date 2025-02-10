@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import AddBtn from "./AddBtn";
-import MOCK_DATA from "../assets/data";
+import AddBtn from "./AddBtn.jsx";
+import MOCK_DATA from "../assets/data.js";
 
 const StCard = styled.div`
   width: 200px;

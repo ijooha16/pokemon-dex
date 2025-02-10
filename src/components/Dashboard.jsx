@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StBox, StDexBox, StH1 } from "../shared/styleGuide";
+import { StBox, StDexBox, StH1 } from "../shared/styleGuide.js";
 
 const StDashBox = styled.div`
   height: 150px;

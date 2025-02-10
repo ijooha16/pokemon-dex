@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import AddBtn from "../components/AddBtn.jsx";
+import AddBtn from "./AddBtn.jsx";
 
 const StPopup = styled.div`
   /* opacity: 0; */

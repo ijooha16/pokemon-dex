@@ -6,9 +6,9 @@ import { ToastContainer, toast } from "react-toastify";
 
 import logo from "../assets/logo.png";
 import pokeball from "../assets/pokeball.png";
-import Dashboard from "../components/Dashboard";
-import { PokemonList } from "../components/PokemonList";
-import Popup from "../components/Popup";
+import Dashboard from "../components/Dashboard.jsx";
+import { PokemonList } from "../components/PokemonList.jsx";
+import Popup from "../components/Popup.jsx";
 
 const StLogoImg = styled.img`
   width: 300px;
@@ -18,7 +18,7 @@ const StLogoImg = styled.img`
 const Dex = () => {
   const storage = () => {
     //로컬 스토리지 비어있으면 초기값 설정
-    if (localStorage.getItem("pokemonDex").length < 6) {
+    if (!localStorage.getItem("pokemonDex")) {
       const initialMy = Array(6).fill({
         url: pokeball,
         name: "",
